@@ -48,3 +48,18 @@ export function detalharUsuario(req:Request, res:Response):any {
     return res.status(200).json(usuario)
 
 }
+
+export function excluirUsuario(req:Request, res:Response):any {
+    const {id} =req.params
+    const usuarioIndece = usuarios.findIndex((item)=>{
+        return item.id === id
+    })
+    if (usuarioIndece === -1 ){
+        res.status(404).json({
+            mensagem : "Usuario não encontrado"
+        })
+    }
+
+    usuarios.splice(usuarioIndece, 1)
+    return res.status(204).send()
+}
