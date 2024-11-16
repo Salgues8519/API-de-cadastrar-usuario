@@ -29,3 +29,22 @@ export function cadastrar(req:Request, res:Response):any {
         mensagem: "Novo Usuario Cadastrado"
     })
 }
+
+export function listar(req:Request, res:Response) {
+    res.json(usuarios)
+}
+
+export function detalharUsuario(req:Request, res:Response):any {
+    const {id} = req.params
+    const usuario = usuarios.find((item)=> {
+        return item.id === id
+    })
+    
+    if (!usuario) {
+        return res.status(404).json({
+            mensangem: 'Usuario não encontrado'
+        })
+    }
+    return res.status(200).json(usuario)
+
+}
